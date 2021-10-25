@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    +79855553366
-</body>
-</html>
+{% extends 'layout/basic.html' %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block content %}
+{% for c in cb %}
+<p>Компания:{{ c.name }}</p>
+<p>Телефон: <a href="Tel:{{ c.phone_num }}">{{ c.phone_num }}</a></p>
+<p>Адрес: {{ c.address }}</p>
+<p>E-mail: <a href="mailto:{{ c.email_ad }}">{{ c.email_ad }}</a></p>
+{% endfor %}
+{% endblock %}

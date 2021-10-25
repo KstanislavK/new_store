@@ -1,0 +1,9 @@
+{% load static %}
+<div class="header_cap">
+    <div class="logo"><a href="/"><img src="{% static 'johnson_store/img/logo.jpg' %}" alt="logo" class="img_cap"></a></div>
+    <div class="main_menu">
+        <a href="{% url 'index' %}" class="main_menu__links">Главная</a>
+        <a href="{% url 'films:index' %}" class="main_menu__links">Пленки</a>
+        <a href="{% url 'contacts' %}" class="main_menu__links">Контакты</a>
+    </div>
+</div>

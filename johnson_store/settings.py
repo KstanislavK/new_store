@@ -56,7 +56,7 @@ ROOT_URLCONF = 'johnson_store.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['johnson_store/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
