@@ -15,6 +15,13 @@ class FilmsCategory(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Серия"
+        verbose_name_plural = "Серии"
+
 
 class Films(models.Model):
     category = models.ForeignKey(
@@ -34,12 +41,20 @@ class Films(models.Model):
     image = models.ImageField(
         upload_to="films_img",
         blank=True,
+        default="films_img/johnson_default.png"
     )
     price_roll = models.IntegerField(
-        verbose_name="цена",
+        verbose_name="цена за рулон",
         default=0,
     )
     price_meter = models.IntegerField(
-        verbose_name="цена",
+        verbose_name="цена за метр",
         default=0,
     )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Пленка"
+        verbose_name_plural = "Пленки"

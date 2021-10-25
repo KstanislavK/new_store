@@ -6,4 +6,15 @@
 
 {% block content %}
 {% include 'filmsapp/includes/inc_series_menu.html' %}
+<div class="content_wrapper">
+    {% for film in films %}
+    <div class="film_mini_card">
+        <h4 class="film_name">{{ film.name }}</h4>
+        <img src="/media/{{ film.image }}" alt="" class="film_img">
+        <p class="film_category">Серия: <b>{{ film.category.name }}</b></p>
+        <p class="price">Цена за рулон: {{ film.price_roll }} р.</p>
+        <p class="price">Цена за метр: {{ film.price_meter }} р.</p>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

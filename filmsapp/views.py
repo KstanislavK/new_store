@@ -1,12 +1,17 @@
 from django.shortcuts import render
 
+from filmsapp.models import Films, FilmsCategory
+
 
 def index(request):
     title = "пленки"
-    category_links = []
+
+    films = Films.objects.all()
+    series = FilmsCategory.objects.all()
 
     context = {
         'title': title,
-        'category_links': category_links,
+        'films': films,
+        'series': series,
     }
-    return render(request, 'filmsapp/index.html')
+    return render(request, 'filmsapp/index.html', context)

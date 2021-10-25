@@ -1,11 +1,8 @@
 {% load static %}
 <div class="films_category_menu">
     <ul class="films_category_menu_links__list">
-        <li><a href="" class="menu_links">RayGuard</a></li>
-        <li><a href="" class="menu_links">Eclipse</a></li>
-        <li><a href="" class="menu_links">Marathon</a></li>
-        <li><a href="" class="menu_links">Silhouette</a></li>
-        <li><a href="" class="menu_links">Greystone</a></li>
-        <li><a href="" class="menu_links">Insulatir</a></li>
+        {% for link in series %}
+        <li><a href="" class="menu_links">{{ link.name }}</a></li>
+        {% endfor %}
     </ul>
 </div>
