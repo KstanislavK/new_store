@@ -6,15 +6,19 @@
 
 {% block content %}
 {% include 'filmsapp/includes/inc_series_menu.html' %}
+{% if category %}
+<h3>Серия: {{ category.name|title }}</h3><br>
+{% endif %}
 <div class="content_wrapper">
     {% for film in films %}
-    <div class="film_mini_card">
-        <h4 class="film_name">{{ film.name }}</h4>
-        <img src="/media/{{ film.image }}" alt="" class="film_img">
-        <p class="film_category">Серия: <b>{{ film.category.name }}</b></p>
-        <p class="price">Цена за рулон: {{ film.price_roll }} р.</p>
-        <p class="price">Цена за метр: {{ film.price_meter }} р.</p>
-    </div>
+        <div class="film_mini_card">
+            <h4 class="film_name">{{ film.name }}</h4>
+            <img src="/media/{{ film.image }}" alt="" class="film_img">
+            <p class="film_category">Серия: <b>{{ film.category.name }}</b></p>
+            <p class="price">Цена за рулон: {{ film.price_roll }} р.</p>
+            <p class="price">Цена за метр: {{ film.price_meter }} р.</p>
+            <a href="{% url 'basket:add' film.pk %}">Добавить в корзину</a>
+        </div>
     {% endfor %}
 </div>
 {% endblock %}

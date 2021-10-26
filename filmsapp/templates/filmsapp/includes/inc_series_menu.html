@@ -1,8 +1,16 @@
 {% load static %}
 <div class="films_category_menu">
     <ul class="films_category_menu_links__list">
-        {% for link in series %}
-        <li><a href="" class="menu_links">{{ link.name }}</a></li>
+        <li>
+            <a href="{% url 'films:category' 0 %}"
+               class="menu_links {% if request.resolver_match.kwargs.pk == 0 %}active{% endif %}">
+                Все
+            </a>
+        </li>
+        {% for link in links_menu %}
+        <li><a href="{% url 'films:category' link.pk %}"
+               class="menu_links {% if request.resolver_match.kwargs.pk|add:'0' == link.pk %}active{% endif %}">
+            {{ link.name }}</a></li>
         {% endfor %}
     </ul>
 </div>

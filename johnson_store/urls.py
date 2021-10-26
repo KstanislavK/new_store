@@ -11,6 +11,7 @@ urlpatterns = [
     path('contacts/', contacts, name="contacts"),
     path('films/', include('filmsapp.urls', namespace='films')),
     path('auth/', include('authapp.urls', namespace='auth')),
+    path('basket/', include('basketapp.urls', namespace='basket')),
 ]
 
 if settings.DEBUG:

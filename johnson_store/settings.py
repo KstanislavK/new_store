@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'filmsapp',
     'authapp',
+    'basketapp',
 ]
 
 AUTH_USER_MODEL = 'authapp.ShopUser'
