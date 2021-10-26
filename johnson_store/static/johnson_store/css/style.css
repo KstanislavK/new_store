@@ -17,6 +17,7 @@
 .header_cap {
     display:flex;
     align-items: flex-end;
+    justify-content: space-between;
 }
 
 .img_cap {
@@ -86,4 +87,21 @@
     border-radius: 5px;
     padding: 4px;
     margin: 4px;
+}
+
+.form_wrapper {
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.form_login {
+
+}
+
+.btn_login {
+    background-color: #1959d1;
+    color: white;
+    border: 0;
+    padding: 8px;
+    width: 150px;
 }

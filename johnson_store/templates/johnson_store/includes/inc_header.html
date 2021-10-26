@@ -6,4 +6,16 @@
         <a href="{% url 'films:index' %}" class="main_menu__links">Пленки</a>
         <a href="{% url 'contacts' %}" class="main_menu__links">Контакты</a>
     </div>
+    <div class="main_menu auth_menu">
+        {% if user.is_authenticated %}
+        <a href="{% url 'auth:edit' %}" class="main_menu__links">
+            {{ user.first_name|default:"Пользователь" }}
+        </a>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <a href="{% url 'auth:logout' %}" class="main_menu__links">Выйти</a>
+        {% else %}
+            <a href="{% url 'auth:login' %}" class="main_menu__links">Войти</a>
+        {% endif %}
+    </div>
 </div>

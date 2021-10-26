@@ -1,0 +1,17 @@
+{% extends 'authapp/basic.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form_wrapper">
+    <h3>Редактирования пользователя</h3>
+    <br>
+    <form action="{% url 'auth:edit' %}" method="post" class="form_login">
+        {% csrf_token %}
+        {{ edit_form.as_p }}
+        <br>
+        <input type="submit" value="Сохранить" class="btn_login">
+    </form>
+    <br>
+    <a href="{% url 'index' %}" class="main_menu__links">На главную</a>
+</div>
+{% endblock %}
