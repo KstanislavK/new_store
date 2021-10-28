@@ -1,0 +1,61 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="{% static 'basketapp/js/basket_scripts.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<h4>Ваша корзина</h4>
+
+<div class="basket_list">
+    <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Название</th>
+                <th scope="col">Количество</th>
+                <th scope="col">Стоимость</th>
+                <th scope="col">Сумма</th>
+                <th scope="col">Удалить</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in basket_items %}
+            <tr>
+                <td scope="row">{{ forloop.counter }}</td>
+                <td>{{ item.film.name }} ({{ item.film.category }})</td>
+                <td>
+                    <input type="number" name="{{ item.pk }}" value="{{ item.quantity }}" min="0">
+                </td>
+                <td>{{ item.film.price_roll }}&nbspруб.</td>
+                <td>{{ item.film_cost }}&nbspруб.</td>
+                <td>
+                    <button class="btn btn-round">
+                        <a href="{% url 'basket:remove' item.pk %}">Удалить</a>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+            <tfoot>
+            <tr>{% if basket_items %}
+                <td></td>
+                <td>Итого:</td>
+                <td>
+                    {{ basket.0.total_quantity }}
+                </td>
+                <td></td>
+                <td>
+                    {{ basket.0.total_cost }}&nbspруб.
+                </td>
+                <td></td>
+            </tr>
+            {% endif %}
+            </tfoot>
+            </tbody>
+        </table>
+</div>
+{% endblock %}

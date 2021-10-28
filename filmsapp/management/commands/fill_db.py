@@ -16,7 +16,7 @@ def load_from_json(file_name):
 class Command(BaseCommand):
     def handle(self, *args, **options):
         categories = load_from_json('series')
-
+        Films.objects.all().delete()
         FilmsCategory.objects.all().delete()
         for category in categories:
             new_category = FilmsCategory(**category)
@@ -24,7 +24,7 @@ class Command(BaseCommand):
 
         films = load_from_json('films')
 
-        Films.objects.all().delete()
+
         for film in films:
             category_name = film['category']
 

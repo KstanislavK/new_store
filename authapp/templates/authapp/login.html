@@ -9,6 +9,9 @@
             <br>
             <form action="{% url 'auth:login' %}" method="post" class="form-horizontal">
                 {% csrf_token %}
+                {% if next %}
+                <input type="hidden" name="next" value="{{ next }}">
+                {% endif %}
                 {{ login_form.as_p }}
                 <br>
                 <input type="submit" value="Войти" class="btn btn-primary">
@@ -21,3 +24,5 @@
     </div>
 </div>
 {% endblock %}
+
+1:48:26

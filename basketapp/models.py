@@ -23,3 +23,18 @@ class Basket(models.Model):
         auto_now_add=True
     )
 
+    @property
+    def film_cost(self):
+        return self.film.price_roll * self.quantity
+
+    @property
+    def total_quantity(self):
+        items = Basket.objects.filter(user=self.user)
+        total_quantity = sum(list(map(lambda x: x.quantity, items)))
+        return total_quantity
+
+    @property
+    def total_cost(self):
+        items = Basket.objects.filter(user=self.user)
+        total_cost = sum(list(map(lambda x: x.film_cost, items)))
+        return total_cost

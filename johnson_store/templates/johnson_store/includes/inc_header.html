@@ -10,10 +10,15 @@
         {% if user.is_authenticated %}
         <a href="{% url 'auth:edit' %}" class="main_menu__links">
             {{ user.first_name|default:"Пользователь" }}
-        </a>
+        </a><br>
         <a href="{% url 'basket:view' %}" class="main_menu__links">
             <span>
-                {% if basket %} ({{ basket|length }}) {% endif %}
+                {% if basket %}
+                    {{ basket.0.total_quantity }} товаров на
+                    {{ basket.0.total_cost|floatformat:0 }} руб.
+                {% else %}
+                    Нет товаров :(
+                {% endif %}
             </span>
         </a>
         {% endif %}
@@ -25,3 +30,4 @@
         {% endif %}
     </div>
 </div>
+<hr>

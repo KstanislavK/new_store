@@ -1,5 +1,34 @@
 {% extends 'layout/basic.html' %}
-
+{% block title %}Пленки Johnson. Высокое качество, производство США. {{ title|title }}{% endblock %}
 {% block content %}
-Здесь будет общая информация, спецпредложения, акции
+<h3>Горячие предложения:</h3>
+<div class="hot_offers content_wrapper">    
+    <div class="film_mini_card film_card_index_page">
+        <h4 class="film_name">{{ hot_offer.name }}</h4>
+        <img src="/media/{{ hot_offer.image }}" alt="" class="film_img">
+        <p class="film_category">Серия: <b>{{ hot_offer.category.name }}</b></p>
+        <p class="price">Цена за рулон: {{ hot_offer.price_roll }} р.</p>
+        <a href="{% url 'basket:add' hot_offer.pk %}" class="main_menu__links">Добавить в корзину</a>
+    </div>
+    <div class="film_mini_card film_card_index_page">
+        <p class="film_description">
+            {{ hot_offer.description }}
+        </p>
+        <p>Пленку можно купить в отрез по цене {{ hot_offer.price_meter }} за погонный метр</p>
+        <p>В отрез пленка продается только в офисе, без доставки.</p>
+    </div>
+</div>
+<h4>Другие пленки этой категории:</h4>
+<div class="same_cat_film content_wrapper">    
+    {% for item in same_cat_film %}
+        <div class="film_mini_card">
+            <a href="{% url 'films:film_card' item.pk %}">
+                <h4 class="film_name">{{ item.name }}</h4>
+                <img src="/media/{{ item.image }}" alt="" class="film_img">
+            </a>
+                <p class="price">Цена за рулон: {{ item.price_roll }} р.</p>
+            <a href="{% url 'basket:add' item.pk %}" class="main_menu__links">Добавить в корзину</a>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}
