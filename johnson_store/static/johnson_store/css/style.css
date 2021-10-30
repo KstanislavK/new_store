@@ -86,6 +86,11 @@
 	list-style-type: none;	
 }
 
+.footer_contacts a:hover {
+    text-decoration: underline;
+    color: white;
+}
+
 .film_img {
     width: 150px;
 }
