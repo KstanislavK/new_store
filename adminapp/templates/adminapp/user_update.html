@@ -1,0 +1,21 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block title %}{{ title|title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fa fa-table mr-1"></i>Создание пользователя
+        </div>
+        <div class="card-body">
+            <form action="" class="form-horizontal" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ update_form.as_p }}
+                <input type="submit" class="form-control" value="Сохранить">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

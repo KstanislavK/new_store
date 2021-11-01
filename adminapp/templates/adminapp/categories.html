@@ -7,7 +7,7 @@
 <div class="container-fluid">
     <div class="card mb-4">
         <div class="card-header">
-            <i class="fas fa-table mr-1">Категории</i>
+            <i class="fa fa-table mr-1"></i>Категории
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -29,11 +29,13 @@
                             {{ cat.name }}
                             </a>
                         </td>
-                        <td><a href="#">{{ cat.cnt }} позиций</a></td>
+                        <td><a href="{% url 'adminapp:films' cat.pk %}">{{ cat.cnt }} позиций</a></td>
                         <td>{{ cat.description }}</td>
                         <td>{{ cat.updated }}</td>
-                        <td>
-                            <a href="{#% url 'admin_staff:category_delete' %#}">Удалить</a>
+                        <td class="text-center">
+                            <a href="{#% url 'admin_staff:category_delete' %#}">
+                                <button class="btn btn-outline-danger"><i class="bi bi-x-square"></i> Удалить</button>
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -43,7 +45,7 @@
         </div>
         <div class="card-footer">
             <a href="{#% url 'admin_staff:category_create' %#}">
-                <button class="btn btn-success">Создать категорию</button>
+                <button class="btn btn-primary">Создать категорию</button>
             </a>
         </div>
     </div>

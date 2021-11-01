@@ -6,31 +6,32 @@
         <a href="{% url 'films:index' %}" class="main_menu__links">Пленки</a>
         <a href="{% url 'contacts' %}" class="main_menu__links">Контакты</a>
     </div>
-    <div class="main_menu auth_menu">
+    <div class="btn-group" role="group">
         {% if user.is_authenticated %}
-        <a href="{% url 'auth:edit' %}" class="main_menu__links">
+        <a href="{% url 'auth:edit' %}" class="btn btn-link text-decoration-none">
             {{ user.first_name|default:"Пользователь" }}
         </a><br>
-        <a href="{% url 'basket:view' %}" class="main_menu__links">
-            <span>
-                {% if basket %}
-                    {{ basket.0.total_quantity }} товаров на
-                    {{ basket.0.total_cost|floatformat:0 }} руб.
-                {% else %}
-                    Нет товаров :(
-                {% endif %}
-            </span>
+        <a href="{% url 'basket:view' %}" class="btn btn-link text-decoration-none">
+            <i class="bi bi-basket">({{ basket.0.total_quantity }})</i>
+<!--            <span>-->
+<!--                {% if basket %}-->
+<!--                    {{ basket.0.total_quantity }} товаров на-->
+<!--                    {{ basket.0.total_cost|floatformat:0 }} руб.-->
+<!--                {% else %}-->
+<!--                    Нет товаров :(-->
+<!--                {% endif %}-->
+<!--            </span>-->
         </a>
         {% endif %}
         <br>
         {% if user.is_superuser %}
-            <a href="{% url 'admin_staff:users' %}" class="main_menu__links">Админка</a>
+            <a href="{% url 'admin_staff:users' %}" class="btn btn-link text-decoration-none">Админка</a>
         {% endif %}
         <br>
         {% if user.is_authenticated %}
-            <a href="{% url 'auth:logout' %}" class="main_menu__links">Выйти</a>
+            <a href="{% url 'auth:logout' %}" class="btn btn-link text-decoration-none">Выйти</a>
         {% else %}
-            <a href="{% url 'auth:login' %}" class="main_menu__links">Войти</a>
+            <a href="{% url 'auth:login' %}" class="btn btn-link text-decoration-none">Войти</a>
         {% endif %}
     </div>
 </div>

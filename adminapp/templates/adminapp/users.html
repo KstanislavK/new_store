@@ -7,7 +7,7 @@
 <div class="container-fluid">
     <div class="card mb-4">
         <div class="card-header">
-            <i class="fas fa-table mr-1">Пользователи</i>
+            <i class="fa fa-table mr-1"></i>Пользователи
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -16,11 +16,11 @@
                     <tr>
                         <th>Имя пользователя</th>
                         <th>Имя</th>
-                        <th>Фамилия</th>
+                        <th>Компания</th>
                         <th>Адрес эл. почты</th>
                         <th>Персонал сайта</th>
                         <th>Активный</th>
-                        <th>Послдений вход</th>
+                        <th>Действия</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,24 +32,26 @@
                             </a>
                         </td>
                         <td>{{ user.first_name }}</td>
-                        <td>{{ user.last_name }}</td>
+                        <td>{{ user.company_name }}</td>
                         <td>{{ user.email }}</td>
                         <td class="text-center">
                             {% if user.is_staff %}
-                            <i class="fa fa-check-circle">Is staff</i>
+                            <i class="fa fa-check-circle"></i>Is staff
                             {% else %}
-                            <i class="fa fa-times-circle">Not Staff</i>
+                            <i class="fa fa-times-circle"></i>Not Staff
                             {% endif %}
                         </td>
                         <td>
                             {% if user.is_active %}
-                            <i class="fa fa-check-circle">Active</i>
+                            <i class="fa fa-check-circle"></i>Active
                             {% else %}
-                            <i class="fa fa-times-circle">N/A</i>
+                            <i class="fa fa-times-circle"></i>N/A
                             {% endif %}
                         </td>
                         <td class="text-center">
-                            {{ user.last_login }}
+                            <a href="{#% url 'admin_staff:user_delete' %#}">
+                                <button class="btn btn-outline-danger"><i class="bi bi-x-square"></i> Удалить</button>
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -58,8 +60,8 @@
             </div>
         </div>
         <div class="card-footer">
-            <a href="{#% url 'admin_staff:user_create' %#}">
-                <button class="btn btn-success">Создать пользователя</button>
+            <a href="{% url 'admin_staff:user_create' %}">
+                <button class="btn btn-primary">Создать пользователя</button>
             </a>
         </div>
     </div>
