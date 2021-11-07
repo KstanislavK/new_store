@@ -7,7 +7,7 @@
 <div class="container-fluid">
     <div class="card mb-4">
         <div class="card-header">
-            <i class="fa fa-table mr-1"></i>Пользователи
+            <i class="fa fa-table mr-1"></i>{{ title }}
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -20,14 +20,13 @@
                         <th>Адрес эл. почты</th>
                         <th>Персонал сайта</th>
                         <th>Активный</th>
-                        <th>Действия</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for user in objects %}
                     <tr>
                         <td>
-                            <a href="{#% url 'admin_staff:user_update' user.id %#}" style="color: dodgerblue">
+                            <a href="{% url 'adminapp:user_update' user.id %}" style="color: dodgerblue">
                             {{ user.username }}
                             </a>
                         </td>
@@ -36,22 +35,17 @@
                         <td>{{ user.email }}</td>
                         <td class="text-center">
                             {% if user.is_staff %}
-                            <i class="fa fa-check-circle"></i>Is staff
+                            <i class="bi bi-check-circle" style="color: green;"></i>
                             {% else %}
-                            <i class="fa fa-times-circle"></i>Not Staff
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if user.is_active %}
-                            <i class="fa fa-check-circle"></i>Active
-                            {% else %}
-                            <i class="fa fa-times-circle"></i>N/A
+                            <i class="bi bi-x-circle" style="color: red;"></i>
                             {% endif %}
                         </td>
                         <td class="text-center">
-                            <a href="{#% url 'admin_staff:user_delete' %#}">
-                                <button class="btn btn-outline-danger"><i class="bi bi-x-square"></i> Удалить</button>
-                            </a>
+                            {% if user.is_active %}
+                            <i class="bi bi-check-circle" style="color: green;"></i>
+                            {% else %}
+                            <i class="bi bi-x-circle" style="color: red;"></i>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

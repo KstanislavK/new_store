@@ -1,9 +1,10 @@
 {% load static %}
 <div class="header_cap">
-    <div class="logo"><a href="/"><img src="{% static 'johnson_store/img/logo.jpg' %}" alt="logo" class="img_cap"></a></div>
+    <div class="logo"><a href="/"><img src="{% static 'johnson_store/img/logo.jpg' %}" alt="logo" class="img_cap"></a>
+    </div>
     <div class="main_menu">
         <a href="{% url 'index' %}" class="main_menu__links">Главная</a>
-        <a href="{% url 'films:index' %}" class="main_menu__links">Пленки</a>
+        <a href="{% url 'films:category' 0 %}" class="main_menu__links">Пленки</a>
         <a href="{% url 'contacts' %}" class="main_menu__links">Контакты</a>
     </div>
     <div class="btn-group" role="group">
@@ -11,27 +12,25 @@
         <a href="{% url 'auth:edit' %}" class="btn btn-link text-decoration-none">
             {{ user.first_name|default:"Пользователь" }}
         </a><br>
-        <a href="{% url 'basket:view' %}" class="btn btn-link text-decoration-none">
-            <i class="bi bi-basket">({{ basket.0.total_quantity }})</i>
-<!--            <span>-->
-<!--                {% if basket %}-->
-<!--                    {{ basket.0.total_quantity }} товаров на-->
-<!--                    {{ basket.0.total_cost|floatformat:0 }} руб.-->
-<!--                {% else %}-->
-<!--                    Нет товаров :(-->
-<!--                {% endif %}-->
-<!--            </span>-->
+        <a href="{% url 'basket:view' %}">
+            <button type="button" class="btn btn-link position-relative">
+                <i class="bi bi-basket"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ basket.0.total_quantity }}
+            <span class="visually-hidden">goods count</span>
+          </span>
+            </button>
         </a>
         {% endif %}
         <br>
         {% if user.is_superuser %}
-            <a href="{% url 'admin_staff:users' %}" class="btn btn-link text-decoration-none">Админка</a>
+        <a href="{% url 'adminapp:index' %}" class="btn btn-link text-decoration-none">Админка</a>
         {% endif %}
         <br>
         {% if user.is_authenticated %}
-            <a href="{% url 'auth:logout' %}" class="btn btn-link text-decoration-none">Выйти</a>
+        <a href="{% url 'auth:logout' %}" class="btn btn-link text-decoration-none">Выйти</a>
         {% else %}
-            <a href="{% url 'auth:login' %}" class="btn btn-link text-decoration-none">Войти</a>
+        <a href="{% url 'auth:login' %}" class="btn btn-link text-decoration-none">Войти</a>
         {% endif %}
     </div>
 </div>

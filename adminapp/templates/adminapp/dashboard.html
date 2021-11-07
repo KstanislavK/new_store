@@ -1,0 +1,48 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block title %}{{ title|title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Пользователи</h5>
+                    <p class="card-text">В системе зарегистрировано пользователей: {{ users_count }}</p>
+                    <p class="card-text">Из них активных: {{ users_count_active }}</p>
+                    <a href="{% url 'adminapp:users' %}" class="btn btn-primary">Перейти в раздел</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Категории</h5>
+                    <p class="card-text">Всего категорий в продаже: {{ categories_count }}</p>
+                    <a href="{% url 'adminapp:categories' %}" class="btn btn-primary">Перейти в раздел</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Пленки</h5>
+                    <p class="card-text">Всего позиций пленок: {{ films_count }}</p>
+                    <a href="{% url 'adminapp:films_all' %}" class="btn btn-primary">Перейти в раздел</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Заказы. <span class="badge bg-secondary">В разработке</span></h5>
+                    <p class="card-text">Всего позиций в корзинах: {{ goods_in_basket_added }}</p>
+                    <a href="{#% url 'adminapp:films' %#}" class="btn btn-primary disabled"  aria-disabled="true">Перейти в раздел</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

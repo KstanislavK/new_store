@@ -7,7 +7,7 @@
 <div class="container-fluid">
     <div class="card mb-4">
         <div class="card-header">
-            <i class="fa fa-table mr-1"></i>Пленки серии "{{ category.name }}"
+            <i class="fa fa-table mr-1"></i>{{ title }}
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -60,11 +60,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-        <div class="card-footer">
-            <a href="{% url 'admin_staff:films_create' category.pk %}">
-                <button class="btn btn-primary">Добавить пленку</button>
-            </a>
         </div>
     </div>
 </div>

@@ -7,15 +7,31 @@
 <div class="container">
     <div class="card mb-4">
         <div class="card-header">
-            <i class="fa fa-table mr-1"></i>Создание пользователя
+            <i class="fa fa-table mr-1"></i>{{ title }}
         </div>
-        <div class="card-body">
-            <form action="" class="form-horizontal" method="post" enctype="multipart/form-data">
+        <form action="" class="form-horizontal" method="post" enctype="multipart/form-data">
+            <div class="card-body">
                 {% csrf_token %}
-                {{ update_form.as_p }}
-                <input type="submit" class="form-control" value="Сохранить">
-            </form>
-        </div>
+                {{ form.as_p }}
+            </div>
+            <div class="container d-flex justify-content-around card-footer">
+                <div>
+                    <input type="submit" class="form-control btn btn-success w-45" value="Сохранить">
+                </div>
+                <div>
+                    {% if user.is_active %}
+                    <a href="{% url 'adminapp:user_delete' user.pk %}">
+                        <button class="btn btn-danger w-45"><i class="bi bi-trash"></i> Удалить</button>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'adminapp:user_delete' user.pk %}">
+                        <button class="btn btn-danger w-45"><i class="bi bi-trash"></i> Восстановить</button>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 </div>
 {% endblock %}
