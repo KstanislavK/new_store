@@ -7,18 +7,10 @@ from johnson_store.views import get_same_cat_film
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-def get_basket(user):
-    if user.is_authenticated:
-        return Basket.objects.filter(user=user)
-    else:
-        return []
-
-
 def index(request, pk=None, page=1):
     title = "пленки"
     films = Films.objects.filter(is_active=True).order_by('name')
     links_menu = FilmsCategory.objects.all()
-    basket = get_basket(request.user)
 
     if pk is not None:
         if pk == 0:
@@ -41,7 +33,6 @@ def index(request, pk=None, page=1):
             'links_menu': links_menu,
             'category': category,
             'films': films_paginator,
-            'basket': basket,
         }
 
         return render(request, 'filmsapp/index.html', context)
@@ -50,14 +41,12 @@ def index(request, pk=None, page=1):
         'title': title,
         'films': films,
         'links_menu': links_menu,
-        'basket': basket,
     }
     return render(request, 'filmsapp/index.html', context)
 
 
 def film_card(request, pk):
     title = ""
-    basket = get_basket(request.user)
     film = get_object_or_404(Films, pk=pk)
     links_menu = FilmsCategory.objects.all()
 
@@ -65,7 +54,6 @@ def film_card(request, pk):
 
     context = {
         'title': title,
-        'basket': basket,
         'film': film,
         'same_films': same_films,
         'links_menu': links_menu,
