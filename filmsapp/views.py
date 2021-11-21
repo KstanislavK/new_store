@@ -20,7 +20,7 @@ def index(request, pk=None, page=1):
             category = get_object_or_404(FilmsCategory, pk=pk)
             films = Films.objects.filter(category__pk=pk).filter(is_active=True).order_by('name')
 
-        paginator = Paginator(films, 5)
+        paginator = Paginator(films, 10)
         try:
             films_paginator = paginator.page(page)
         except PageNotAnInteger:

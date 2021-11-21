@@ -10,6 +10,7 @@
             <form action="{% url 'auth:edit' %}" method="post" class="form_login">
                 {% csrf_token %}
                 {{ edit_form.as_p }}
+                {{ profile_form.as_p }}
                 <br>
                 <input type="submit" value="Сохранить" class="btn_login">
             </form>

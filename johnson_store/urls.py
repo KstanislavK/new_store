@@ -12,7 +12,8 @@ urlpatterns = [
     path('films/', include('filmsapp.urls', namespace='films')),
     path('auth/', include('authapp.urls', namespace='auth')),
     path('basket/', include('basketapp.urls', namespace='basket')),
-    path('admin_staff/', include('adminapp.urls', namespace='admin_staff'))
+    path('admin_staff/', include('adminapp.urls', namespace='admin_staff')),
+    path('', include('social_django.urls', namespace='social')),
 ]
 
 if settings.DEBUG:
