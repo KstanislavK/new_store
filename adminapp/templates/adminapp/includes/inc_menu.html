@@ -14,6 +14,10 @@
                    class="{% if request.resolver_match.url_name == 'categories' %}active{% endif %} nav-link">Категории</a>
             </li>
             <li class="nav-item">
+                <a href="{% url 'ordersapp:orders_list' %}"
+                   class="{% if request.resolver_match.url_name == 'categories' %}active{% endif %} nav-link">Заказы</a>
+            </li>
+            <li class="nav-item">
                 <a href="{% url 'index' %}" class="nav-link">На сайт</a>
             </li>
         </ul>

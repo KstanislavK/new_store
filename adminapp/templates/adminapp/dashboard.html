@@ -37,9 +37,9 @@
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Заказы. <span class="badge bg-secondary">В разработке</span></h5>
-                    <p class="card-text">Всего позиций в корзинах: {{ goods_in_basket_added }}</p>
-                    <a href="{#% url 'adminapp:films' %#}" class="btn btn-primary disabled"  aria-disabled="true">Перейти в раздел</a>
+                    <h5 class="card-title">Заказы</h5>
+                    <p class="card-text">Всего заказов: {{ orders_count }}</p>
+                    <a href="{% url 'ordersapp:orders_list' %}" class="btn btn-primary"  aria-disabled="true">Перейти в раздел</a>
                 </div>
             </div>
         </div>

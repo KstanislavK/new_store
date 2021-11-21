@@ -11,6 +11,7 @@ urlpatterns = [
     path('contacts/', contacts, name="contacts"),
     path('films/', include('filmsapp.urls', namespace='films')),
     path('auth/', include('authapp.urls', namespace='auth')),
+    path('orders/', include('ordersapp.urls', namespace='orders')),
     path('basket/', include('basketapp.urls', namespace='basket')),
     path('admin_staff/', include('adminapp.urls', namespace='admin_staff')),
     path('', include('social_django.urls', namespace='social')),

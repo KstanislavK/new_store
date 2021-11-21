@@ -14,6 +14,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views.generic import ListView, CreateView, UpdateView
 
+from ordersapp.models import Orders
+
 
 @user_passes_test(lambda u: u.is_superuser)
 def index(request):
@@ -23,7 +25,7 @@ def index(request):
 
     categories_count = FilmsCategory.objects.all().count()
     films_count = Films.objects.all().count()
-    goods_in_basket_added = Basket.objects.all().count()
+    orders_count = Orders.objects.all().count()
 
     context = {
         'title': title,
@@ -31,7 +33,7 @@ def index(request):
         'users_count_active': users_count_active,
         'categories_count': categories_count,
         'films_count': films_count,
-        'goods_in_basket_added': goods_in_basket_added
+        'orders_count': orders_count
     }
 
     return render(request, 'adminapp/dashboard.html', context)
