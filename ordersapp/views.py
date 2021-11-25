@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
+from django.db.models.signals import pre_save, pre_delete
+from django.dispatch import receiver
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -37,7 +39,8 @@ class OrderItemCreate(CreateView, LoginRequiredMixin):
                 for num, form in enumerate(formset.forms):
                     form.initial['film'] = basket_items[num].film
                     form.initial['quantity'] = basket_items[num].quantity
-                basket_items.delete()
+                    form.initial['price'] = basket_items[num].film.price_roll
+                # basket_items.delete()
             else:
                 formset = OrderFormSet()
         data['orderitems'] = formset
@@ -72,11 +75,15 @@ class OrderUpdate(UpdateView, LoginRequiredMixin):
         OrderFormSet = inlineformset_factory(Orders, OrderItem, form=OrderItemForm, extra=1)
 
         if self.request.POST:
-            formset = OrderFormSet(self.request.POST, instance=self.object)
+            data['orderitems'] = OrderFormSet(self.request.POST)
+            # formset = OrderFormSet(self.request.POST, instance=self.object)
         else:
             formset = OrderFormSet(instance=self.object)
+            for form in formset.forms:
+                if form.instance.pk:
+                    form.initial['price'] = form.instance.film.price_roll
 
-        data['orderitems'] = formset
+            data['orderitems'] = formset
 
         return data
 
@@ -119,3 +126,20 @@ def order_forming_complete(request, pk):
 
     return HttpResponseRedirect(reverse('orders:orders_list'))
 
+
+@receiver(pre_save, sender=OrderItem)
+@receiver(pre_save, sender=Basket)
+def film_quantity_update_save(sender, update_fields, instance, **kwargs):
+    if update_fields is 'quantity' or 'film':
+        if instance.pk:
+            instance.film.quantity -= instance.quantity - sender.get_items(instance.pk).quantity
+        else:
+            instance.film.quantity -= instance.quantity
+        instance.film.save()
+
+
+@receiver(pre_delete, sender=OrderItem)
+@receiver(pre_delete, sender=Basket)
+def film_quantity_update_delete(sender, instance, **kwargs):
+        instance.film.quantity += instance.quantity
+        instance.film.save()

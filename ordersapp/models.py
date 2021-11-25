@@ -3,6 +3,14 @@ from django.db import models
 from filmsapp.models import Films
 
 
+class OrderItemQuerySet(models.QuerySet):
+    def delete(self, *args, **kwargs):
+        for object in self:
+            object.film.quantity += object.quantity
+            object.film.quantity.save()
+        super(OrderItemQuerySet, self).delete(*args, **kwargs)
+
+
 class Orders(models.Model):
     FORMING = 'FM'
     SENT_TO_PROCEED = 'STP'
@@ -62,16 +70,18 @@ class Orders(models.Model):
         items = self.orderitems.select_related()
         return sum(list(map(lambda x: x.quantity * x.film.price_roll, items)))
 
-    # def delete(self):
-    #     for item in self.orderitems.select_related():
-    #         item.film.quantity += item.quantity
-    #         item.film.save()
-    #
-    #     self.is_active = False
-    #     self.save()
+    def delete(self):
+        for item in self.orderitems.select_related():
+            item.film.quantity += item.quantity
+            item.film.save()
+
+        self.is_active = False
+        self.save()
 
 
 class OrderItem(models.Model):
+    objects = OrderItemQuerySet.as_manager()
+
     order = models.ForeignKey(
         Orders,
         related_name='orderitems',
@@ -89,3 +99,9 @@ class OrderItem(models.Model):
 
     def get_product_cost(self):
         return self.film.price_roll * self.quantity
+
+    def delete(self):
+        self.film.quantity += self.quantity
+        self.film.save()
+
+        super(self.__class__, self).delete()

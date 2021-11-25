@@ -51,6 +51,10 @@ class Films(models.Model):
         verbose_name="цена за метр",
         default=0,
     )
+    quantity = models.IntegerField(
+        verbose_name='количество',
+        default=1,
+    )
     is_active = models.BooleanField(default=True)
 
     def __str__(self):

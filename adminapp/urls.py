@@ -20,7 +20,7 @@ urlpatterns = [
     #
     path('films/create/category/<int:pk>/', FilmCreateView.as_view(), name='films_create'),
     path('films/read/category/<int:pk>/', films, name='films'),
-    path('films/update/<int:pk>/', films_update, name='films_update'),
+    path('films/update/<int:pk>/', FilmUpdateView.as_view(), name='films_update'),
     path('films/delete/<int:pk>/', films_delete, name='films_delete'),
     path('films/all/', FilmsAllListView.as_view(), name='films_all'),
 ]

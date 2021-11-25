@@ -6,7 +6,7 @@ app_name = 'ordersapp'
 
 
 urlpatterns = [
-    path('/', OrdersList.as_view(), name='orders_list'),
+    path('', OrdersList.as_view(), name='orders_list'),
     path('create/', OrderItemCreate.as_view(), name='order_create'),
     path('read/<int:pk>/', OrderRead.as_view(), name='order_read'),
     path('update/<int:pk>/', OrderUpdate.as_view(), name='order_update'),

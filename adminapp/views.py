@@ -203,27 +203,39 @@ class FilmCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def films_update(request, pk):
-    edit_film = get_object_or_404(Films, pk=pk)
-    title = f'Редактирование {edit_film.name}'
+# @user_passes_test(lambda u: u.is_superuser)
+# def films_update(request, pk):
+#     edit_film = get_object_or_404(Films, pk=pk)
+#     title = f'Редактирование {edit_film.name}'
+#
+#     if request.method == 'POST':
+#         edit_form = FilmEditForm(request.POST, request.FILES, instance=edit_film)
+#         if edit_form.is_valid():
+#             edit_form.save()
+#             return HttpResponseRedirect(reverse('adminapp:films_update', args=[edit_film.pk]))
+#
+#     else:
+#         edit_form = FilmEditForm(instance=edit_film)
+#
+#     context = {
+#         'title': title,
+#         'update_form': edit_form,
+#         'category': edit_film.category,
+#         'edit_film_pk': edit_film.pk
+#     }
+#     return render(request, 'adminapp/film_update.html', context)
 
-    if request.method == 'POST':
-        edit_form = FilmEditForm(request.POST, request.FILES, instance=edit_film)
-        if edit_form.is_valid():
-            edit_form.save()
-            return HttpResponseRedirect(reverse('adminapp:films_update', args=[edit_film.pk]))
 
-    else:
-        edit_form = FilmEditForm(instance=edit_film)
+class FilmUpdateView(LoginRequiredMixin, UpdateView):
+    model = Films
+    template_name = 'adminapp/film_update.html'
+    success_url = reverse_lazy('admin_staff:films_all')
+    fields = '__all__'
 
-    context = {
-        'title': title,
-        'update_form': edit_form,
-        'category': edit_film.category,
-        'edit_film_pk': edit_film.pk
-    }
-    return render(request, 'adminapp/film_update.html', context)
+    def get_context_data(self, **kwargs):
+        context = super(FilmUpdateView, self).get_context_data(**kwargs)
+        context.update({'title': 'Редактирование пленки'})
+        return context
 
 
 @user_passes_test(lambda u: u.is_superuser)

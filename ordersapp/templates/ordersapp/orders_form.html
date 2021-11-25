@@ -1,5 +1,10 @@
 {% extends "adminapp/base.html" %}
 {% load static %}
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="{% static 'ordersapp/script.js' %}"></script>
+<script src="{% static 'ordersapp/jquery.formset.js' %}"></script>
+{% endblock %}
 
 {% block content %}
    {% include 'ordersapp/includes/inc_order_summary.html' %}
@@ -30,13 +35,22 @@
                                    {% endfor %}
                                {% endif %}
                                {{ field.errors.as_ul }}
-                               {{ field }}
+                               {% if field.name != 'price' %}
+                                {{ field }}
+                               {% else %}
+                                   {% if field.value %}
+                                   <span class="order-items-{{forloop.parentloop.counter0}}-price">
+                                       {{ field.value }}
+                                   </span> руб.
+                                   {% endif %}
+                               {% endif %}
+
                            </td>
                        {% endfor %}
                    </tr>
                {% endfor %}
            </table>
-           <button type="submit" value="сохранить" class="btn btn-default btn-round form-control last">сохранить</button>
+           <button type="submit" value="сохранить" class="btn btn-success">Сохранить</button>
            {% include 'ordersapp/includes/inc_order_actions.html' %}
        </form>
    </div>

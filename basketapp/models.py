@@ -2,9 +2,20 @@ from django.conf import settings
 from django.db import models
 
 from filmsapp.models import Films
+from ordersapp.models import OrderItem
+
+
+class BasketQuerySet(models.QuerySet):
+    def data(self, *args, **kwargs):
+        for object in self:
+            object.film.quantity += object.quantity
+            object.film.quantity.save()
+        super(BasketQuerySet, self).delete(*args, **kwargs)
 
 
 class Basket(models.Model):
+    objects = BasketQuerySet.as_manager()
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -23,6 +34,10 @@ class Basket(models.Model):
         auto_now_add=True
     )
 
+    @staticmethod
+    def get_items(pk):
+        return Basket.objects.filter(pk=pk).first()
+
     @property
     def film_cost(self):
         return self.film.price_roll * self.quantity
@@ -38,3 +53,11 @@ class Basket(models.Model):
         items = Basket.objects.filter(user=self.user)
         total_cost = sum(list(map(lambda x: x.film_cost, items)))
         return total_cost
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            self.film.quantity -= self.quantity - self.__class__.get_items(self.pk).quantity
+        else:
+            self.film.quantity -= self.quantity
+        self.film.save()
+        super(self.__class__, self).save(*args, **kwargs)

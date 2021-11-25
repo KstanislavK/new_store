@@ -19,6 +19,7 @@
                         <th>Описание</th>
                         <th>Цена за рулон</th>
                         <th>Цена за метр</th>
+                        <th>Количество</th>
                         <th>Активность</th>
                         <th>Действие</th>
                     </tr>
@@ -35,8 +36,9 @@
                             </a>
                         </td>
                         <td style="{% if not film.is_active %}opacity: .5; {% endif %}">{{ film.short_desc }}</td>
-                        <td style="{% if not film.is_active %}opacity: .5; {% endif %}">{{ film.price_roll }} р.</td>
-                        <td style="{% if not film.is_active %}opacity: .5; {% endif %}">{{ film.price_meter }} р.</td>
+                        <td style="{% if not film.is_active %}opacity: .5; {% endif %}">{{ film.price_roll }} руб.</td>
+                        <td style="{% if not film.is_active %}opacity: .5; {% endif %}">{{ film.price_meter }} руб.</td>
+                        <td style="{% if not film.is_active %}opacity: .5; {% endif %}">{{ film.quantity }} roll</td>
                         <td class="text-center">
                             {% if film.is_active %}
                             <i class="bi bi-check-circle" style="color: green;"></i>
