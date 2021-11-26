@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    main page
-</body>
-</html>
+{% extends 'layout/basic.html' %}
+{% block title %}Пленки Johnson. Высокое качество, производство США. {{ title|title }}{% endblock %}
+{% block content %}
+<h3>Горячие предложения:</h3>
+<div class="hot_offers content_wrapper">    
+    <div class="card">
+        <img src="/media/{{ hot_offer.image }}" alt="" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">{{ hot_offer.name }}</h5>
+            <p class="card-subtitle mb-2 text-muted">Серия: <b>{{ hot_offer.category.name }}</b></p>
+            <p class="card-text">Цена за рулон: {{ hot_offer.price_roll }} р.</p>
+            <a href="{% url 'basket:add' hot_offer.pk %}" class="btn btn-primary">Добавить в корзину</a>
+        </div>
+    </div>
+</div>
+<h4>Другие пленки этой категории:</h4>
+<div class="card-group justify-content-start">
+    {% for item in same_cat_film %}
+        <div class="film_mini_card card">
+            <a href="{% url 'films:film_card' item.pk %}">
+                <h4 class="film_name">{{ item.name }}</h4>
+                <img src="/media/{{ item.image }}" alt="" class="film_img">
+            </a>
+                <p class="price">Цена за рулон: {{ item.price_roll }} р.</p>
+            <a href="{% url 'basket:add' item.pk %}" class="main_menu__links">Добавить в корзину</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

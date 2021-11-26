@@ -1,0 +1,68 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block title %}{{ title|title }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fa fa-table mr-1"></i>{{ title }}
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Картинка</th>
+                        <th>Название</th>
+                        <th>Описание</th>
+                        <th>Цена за рулон</th>
+                        <th>Цена за метр</th>
+                        <th>Количество</th>
+                        <th>Активность</th>
+                        <th>Действие</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for film in objects %}
+                    <tr>
+                        <td style="{% if not film.is_active %}opacity: .5; {% endif %}">
+                            <img src="/media/{{film.image}}" alt="" style="width: 100px;">
+                        </td>
+                        <td>
+                            <a href="{% url 'adminapp:films_update' film.id %}" style="color: dodgerblue">
+                            {{ film.name }}
+                            </a>
+                        </td>
+                        <td style="{% if not film.is_active %}opacity: .5; {% endif %}">{{ film.short_desc }}</td>
+                        <td style="{% if not film.is_active %}opacity: .5; {% endif %}">{{ film.price_roll }} руб.</td>
+                        <td style="{% if not film.is_active %}opacity: .5; {% endif %}">{{ film.price_meter }} руб.</td>
+                        <td style="{% if not film.is_active %}opacity: .5; {% endif %}">{{ film.quantity }} roll</td>
+                        <td class="text-center">
+                            {% if film.is_active %}
+                            <i class="bi bi-check-circle" style="color: green;"></i>
+                            {% else %}
+                            <i class="bi bi-x-circle" style="color: red;"></i>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            {% if film.is_active %}
+                            <a href="{% url 'adminapp:films_delete' film.pk %}">
+                                <button class="btn btn-danger w-45"><i class="bi bi-trash"></i> Удалить</button>
+                            </a>
+                            {% else %}
+                            <a href="{% url 'adminapp:films_delete' film.pk %}">
+                                <button class="btn btn-success w-45"><i class="bi bi-file-earmark-plus"></i> Восстановить</button>
+                            </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

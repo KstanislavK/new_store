@@ -1,0 +1,31 @@
+{% extends "adminapp/base.html" %}
+{% load static %}
+
+{% block content %}
+{% include 'ordersapp/includes/inc_order_summary.html' %}
+<div class="container">
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Название</th>
+            <th scope="col">Стоимость</th>
+            <th scope="col">Количество</th>
+            <th scope="col">Сумма</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in object.orderitems.select_related %}
+        <tr>
+            <td scope="row">{{ item.film.name }}</td>
+            <td>{{ item.film.price_roll }}&nbspруб</td>
+            <td>{{ item.quantity }} шт.</td>
+            <td>{{ item.get_product_cost }}&nbspруб</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% include 'ordersapp/includes/inc_order_actions.html' %}
+
+{% endblock %}

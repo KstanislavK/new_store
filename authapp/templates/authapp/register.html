@@ -1,0 +1,21 @@
+{% extends 'authapp/basic.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="mx-auto col-4">
+        <div class="row">
+            <h3>Пожалуйста, авторизуйтесь!</h3>
+            <br>
+            <form action="{% url 'auth:register' %}" method="post" class="form-horizontal">
+                {% csrf_token %}
+                {{ register_form.as_p }}
+                <br>
+                <input type="submit" value="Зарегистрироваться" class="btn btn-primary">
+            </form>
+            <br>
+            <a href="{% url 'auth:login' %}" class="main_menu__links">Назад ко входу</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,10 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Пленки</title>
-</head>
-<body>
-    <p>Главная страница пленок</p>
-</body>
-</html>
+{% extends 'layout/basic.html' %}
+{% load static %}
+
+
+{% block title %}Пленки{% endblock %}
+
+{% block content %}
+{% include 'filmsapp/includes/inc_series_menu.html' %}
+{% if category %}
+<h3>Серия: {{ category.name|title }}</h3><br>
+{% endif %}
+<div class="container d-flex justify-content-center flex-wrap">
+    {% for film in films %}
+    <div class="card" style="width: 18rem;">
+        <a href="{% url 'films:film_card' film.pk %}">
+            <h5 class="film_name">{{ film.name }}</h5>
+            <img src="/media/{{ film.image }}" alt="" class="film_img">
+        </a>
+        <div class="card-body">
+            <p class="film_category">Серия: <b>{{ film.category.name }}</b></p>
+            <p class="price">Цена за рулон: {{ film.price_roll }} р.</p>
+            <a href="{% url 'basket:add' film.pk %}" class="main_menu__links">Добавить в корзину</a>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+<div class="paginator">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if films.has_previous %}
+                <li class="page-item ">
+                    <a class="page-link"
+                       href="{% url 'films:page' category.pk films.previous_page_number %}">Previous</a>
+                </li>
+                {% endif %}
+                <li class="page-item">
+                    <a class="page-link" href="#">
+                    <span class="current">
+                страница {{ films.number }} из {{ films.paginator.num_pages }}
+                    </span>
+                    </a>
+                </li>
+                {% if films.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'films:page' category.pk films.next_page_number %}">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

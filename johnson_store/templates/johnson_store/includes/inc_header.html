@@ -1,0 +1,62 @@
+{% load static %}
+<div class="header_cap" xmlns="http://www.w3.org/1999/html">
+    <div class="logo"><a href="/"><img src="{% static 'johnson_store/img/logo.jpg' %}" alt="logo" class="img_cap"></a>
+    </div>
+    <div class="main_menu">
+        <a href="{% url 'index' %}" class="main_menu__links">Главная</a>
+        <a href="{% url 'films:category' 0 %}" class="main_menu__links">Пленки</a>
+        <a href="{% url 'contacts' %}" class="main_menu__links">Контакты</a>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="btn-group">
+        <a href="{% url 'auth:edit' %}" class="btn btn-outline-primary">
+            {{ user.first_name|default:"Пользователь" }}
+        </a>
+        <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{% url 'basket:view' %}" class="dropdown-item">
+                    <button type="button" class="btn btn-link position-relative">
+                        Корзина
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ basket.0.total_quantity }}
+                            <span class="visually-hidden">goods count</span>
+                        </span>
+                    </button>
+                </a>
+            </li>
+            <li>
+                {% if user.is_superuser %}
+                <a href="{% url 'adminapp:index' %}" class="dropdown-item btn btn-outline-primary">
+                     <button type="button" class="btn btn-link position-relative">
+                         Админка
+                     </button>
+                </a>
+                {% endif %}
+            </li>
+            <li>
+                <a class="dropdown-item btn btn-outline-primary" href="#">
+                    <button type="button" class="btn btn-link position-relative">Something else here</button>
+                </a>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li>
+                <a class="dropdown-item btn btn-outline-primary" href="{% url 'auth:logout' %}">
+                    <button type="button" class="btn btn-link position-relative">Выйти</button>
+                </a>
+            </li>
+        </ul>
+    </div>
+    {% else %}
+    <div>
+        <a href="{% url 'auth:login' %}" class="btn btn-link text-decoration-none">Войти</a>
+    </div>
+    {% endif %}
+</div>
+<hr>
