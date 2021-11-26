@@ -11,7 +11,7 @@
 {% endif %}
 <div class="container d-flex justify-content-center flex-wrap">
     {% for film in films %}
-    <div class="card">
+    <div class="card" style="width: 18rem;">
         <a href="{% url 'films:film_card' film.pk %}">
             <h5 class="film_name">{{ film.name }}</h5>
             <img src="/media/{{ film.image }}" alt="" class="film_img">

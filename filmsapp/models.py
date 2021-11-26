@@ -63,3 +63,7 @@ class Films(models.Model):
     class Meta:
         verbose_name = "Пленка"
         verbose_name_plural = "Пленки"
+
+    @staticmethod
+    def get_items():
+        return Films.objects.filter(is_active=True).order_by('category', 'name')
