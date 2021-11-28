@@ -1,0 +1,130 @@
+[
+  {
+    "category": "RayGuard",
+    "name": "CH 05",
+    "short_desc": "VLT: 05",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19000,
+    "price_meter": 700
+  },
+  {
+    "category": "RayGuard",
+    "name": "CH 15",
+    "short_desc": "VLT: 15",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19000,
+    "price_meter": 700
+  },
+  {
+    "category": "RayGuard",
+    "name": "CH 20",
+    "short_desc": "VLT: 20",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19000,
+    "price_meter": 700
+  },
+  {
+    "category": "RayGuard",
+    "name": "CH 35",
+    "short_desc": "VLT: 35",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19000,
+    "price_meter": 700
+  },
+  {
+    "category": "RayGuard",
+    "name": "CH 50",
+    "short_desc": "VLT: 50",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19000,
+    "price_meter": 700
+  },
+  {
+    "category": "Eclipse",
+    "name": "ES 35",
+    "short_desc": "VLT: 35",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19000,
+    "price_meter": 700
+  },
+  {
+    "category": "Eclipse",
+    "name": "ES 50",
+    "short_desc": "VLT: 50",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19000,
+    "price_meter": 700
+  },
+  {
+    "category": "Greystone",
+    "name": "GSN 10",
+    "short_desc": "VLT: 10",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19000,
+    "price_meter": 700
+  },
+  {
+    "category": "Greystone",
+    "name": "GSN 20",
+    "short_desc": "VLT: 20",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19000,
+    "price_meter": 700
+  },
+  {
+    "category": "Greystone",
+    "name": "GSN 30",
+    "short_desc": "VLT: 30",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19000,
+    "price_meter": 700
+  },
+  {
+    "category": "Greystone",
+    "name": "GSN 40",
+    "short_desc": "VLT: 40",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19000,
+    "price_meter": 700
+  },
+  {
+    "category": "Marathon",
+    "name": "MN 30",
+    "short_desc": "VLT: 30",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 20000,
+    "price_meter": 800
+  },
+  {
+    "category": "Silhouette",
+    "name": "SP 15",
+    "short_desc": "VLT: 15",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19500,
+    "price_meter": 750
+  },
+  {
+    "category": "Silhouette",
+    "name": "SP 20",
+    "short_desc": "VLT: 20",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19500,
+    "price_meter": 750
+  },
+  {
+    "category": "Silhouette",
+    "name": "SP 35",
+    "short_desc": "VLT: 35",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19500,
+    "price_meter": 750
+  },
+  {
+    "category": "Silhouette",
+    "name": "SP 15",
+    "short_desc": "VLT: 15",
+    "image": "films_img/johnson_default.png",
+    "price_roll": 19500,
+    "price_meter": 750
+  }
+]
